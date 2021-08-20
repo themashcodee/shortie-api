@@ -51,6 +51,7 @@ export const signin = async (
 
     const { accessToken, refreshToken } = createTokens(isUser._id);
 
+    // setting httpOnly cookies
     res.cookie("refreshToken", refreshToken, {
       expires: new Date(Date.now() + 60000 * 60 * 24 * 30),
       secure: true,
