@@ -53,9 +53,9 @@ export const signin = async (
 
     res.cookie("refreshToken", refreshToken, {
       expires: new Date(Date.now() + 60000 * 60 * 24 * 30),
-      // secure: true, // ENABLE IN PRODUCTION
+      secure: true,
       httpOnly: true,
-      // sameSite: "none", // ENABLE IN PRODUCTION
+      sameSite: "none",
     });
 
     resHandler(res, 200, "User Logged In", { accessToken });
