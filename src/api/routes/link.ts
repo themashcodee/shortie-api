@@ -1,7 +1,10 @@
 import express from "express";
 const router = express.Router();
-import { getAll } from "../controllers/link";
+import { userDetails, addOne, deleteOne, updateOne } from "../controllers/link";
 
-router.get("/getall", getAll);
+router.get("/userdetails", userDetails);
+router.post("/addone", addOne);
+router.delete("/deleteone", deleteOne);
+router.post("/updateone", updateOne);
 
 export default router;

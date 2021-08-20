@@ -21,7 +21,7 @@ require("dotenv").config();
       })
     );
     routes(app, "/api/v1");
-    app.listen(process.env.PORT, () => {
+    app.listen(process.env.PORT || 4000, () => {
       console.log("Server Running...");
     });
   } catch (err) {

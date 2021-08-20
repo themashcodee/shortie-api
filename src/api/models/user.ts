@@ -1,10 +1,33 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 interface User {
   name: string;
   password: string;
-  links?: {}[];
+  links?: [Link];
 }
+export interface Link {
+  shortUrl: string;
+  longUrl: string;
+  visits?: number;
+}
+
+const linkSchema = new mongoose.Schema<Link>(
+  {
+    shortUrl: {
+      required: true,
+      type: String,
+    },
+    longUrl: {
+      required: true,
+      type: String,
+    },
+    visits: {
+      type: Number,
+      default: 0,
+    },
+  },
+  { timestamps: true }
+);
 
 const schema = new mongoose.Schema<User>(
   {
@@ -18,7 +41,7 @@ const schema = new mongoose.Schema<User>(
       min: 8,
     },
     links: {
-      type: Array,
+      type: [linkSchema],
       default: [],
     },
   },
