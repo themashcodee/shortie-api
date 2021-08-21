@@ -16,7 +16,7 @@ require("dotenv").config();
       compression(),
       cookieParser(),
       cors({
-        origin: "https://shortie.netlify.app",
+        origin: ["https://shortie.netlify.app", "http://localhost:3000"],
         credentials: true,
       })
     );
