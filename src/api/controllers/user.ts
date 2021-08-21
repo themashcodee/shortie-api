@@ -53,8 +53,9 @@ export const signin = async (
 
     // setting httpOnly cookies
     res.cookie("refreshToken", refreshToken, {
-      expires: new Date(Date.now() + 60000 * 60 * 24 * 30),
+      maxAge: 60000 * 60 * 24 * 30,
       secure: true,
+      path: "/",
       httpOnly: true,
       sameSite: "none",
     });
@@ -77,11 +78,12 @@ export const refreshToken = async (
     req.cookies.refreshToken,
     process.env.REFRESH_TOKEN_SECRET
   );
+  if (data.payload) return resHandler(res, 401, "You are not Authorised");
   const newAccessToken = recreateAccessToken(data.payload);
   resHandler(res, 200, "Token Regenerated", { accessToken: newAccessToken });
 };
 
 export const logout = (req: Request, res: Response) => {
-  res.clearCookie("refreshToken");
+  res.clearCookie("refreshToken", { maxAge: 0, path: "/" });
   resHandler(res, 200, "Successfully Logged Out");
 };
